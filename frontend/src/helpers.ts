@@ -14,6 +14,22 @@ export const fetchKambings = async () => {
   }
 };
 
+export const fetchKambing = async (params: { id?: any }) => {
+  try {
+    const resp = await fetch(
+      `${import.meta.env.VITE_APP_BASE_URL}/api/kambings/${params.id ?? ""}`
+    );
+
+    if (resp.status !== 200) {
+      throw await resp.text();
+    }
+
+    return (await resp.json()) as any;
+  } catch (e) {
+    return [];
+  }
+};
+
 export const parseCategory = (c: any) => {
   switch (c) {
     case 0:
